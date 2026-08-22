@@ -31,6 +31,8 @@ of games. Teams with at least two fewer rest days won **42.6 percent**.
 ![Team wins and average point differential](docs/assets/team_performance.png)
 
 Charts regenerate from the warehouse with `python scripts/build_showcase.py`.
+The executed notebook case study regenerates with
+`python scripts/build_case_study_notebook.py`.
 
 ## Architecture
 
@@ -110,6 +112,7 @@ src/nba_warehouse/
   pipeline.py orchestration (ingest -> load -> transform -> reconcile)
   cli.py      command-line entry points
 migrations/   Alembic (versioned schema changes)
+notebooks/    executed case study with code, tables, and inline charts
 tests/        unit / integration / data_quality suites + recorded fixtures
 docs/         charter, architecture, data model, runbook
 ```
