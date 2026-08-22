@@ -10,8 +10,9 @@ delivers analysis-ready marts answering one business question:
 Built the way a real data team builds: testing, data quality, idempotency, and
 reconciliation are designed in from the start, not bolted on later.
 
-**[Live showcase page](https://junyanye33.github.io/nba-basketball-operations-warehouse/)** —
-results, charts, and engineering stories at a glance.
+**[Projects page](https://junyanye33.github.io/nba-basketball-operations-warehouse/)** ·
+**[Detailed case study](https://junyanye33.github.io/nba-basketball-operations-warehouse/project.html)**  
+Results, charts, architecture, and engineering stories at a glance.
 
 ## Results at a glance
 
