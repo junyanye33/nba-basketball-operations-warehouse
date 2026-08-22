@@ -1,0 +1,124 @@
+{
+  "games": 1230,
+  "player_rows": 26651,
+  "team_rows": 2460,
+  "players": 582,
+  "game_dates": 164,
+  "first_date": "2025-10-21",
+  "last_date": "2026-04-12",
+  "tests": 18,
+  "reconciliation_passed": 164,
+  "scoring_leaders": [
+    {
+      "player_name": "Luka Dončić",
+      "team": "LAL",
+      "games": 64,
+      "ppg": 33.5,
+      "total_points": 2143.0
+    },
+    {
+      "player_name": "Shai Gilgeous-Alexander",
+      "team": "OKC",
+      "games": 68,
+      "ppg": 31.1,
+      "total_points": 2117.0
+    },
+    {
+      "player_name": "Anthony Edwards",
+      "team": "MIN",
+      "games": 61,
+      "ppg": 28.8,
+      "total_points": 1757.0
+    },
+    {
+      "player_name": "Jaylen Brown",
+      "team": "BOS",
+      "games": 71,
+      "ppg": 28.7,
+      "total_points": 2038.0
+    },
+    {
+      "player_name": "Tyrese Maxey",
+      "team": "PHI",
+      "games": 70,
+      "ppg": 28.3,
+      "total_points": 1980.0
+    },
+    {
+      "player_name": "Kawhi Leonard",
+      "team": "LAC",
+      "games": 65,
+      "ppg": 27.9,
+      "total_points": 1813.0
+    },
+    {
+      "player_name": "Donovan Mitchell",
+      "team": "CLE",
+      "games": 70,
+      "ppg": 27.9,
+      "total_points": 1952.0
+    },
+    {
+      "player_name": "Nikola Jokić",
+      "team": "DEN",
+      "games": 65,
+      "ppg": 27.7,
+      "total_points": 1799.0
+    },
+    {
+      "player_name": "Devin Booker",
+      "team": "PHX",
+      "games": 64,
+      "ppg": 26.1,
+      "total_points": 1668.0
+    },
+    {
+      "player_name": "Kevin Durant",
+      "team": "HOU",
+      "games": 78,
+      "ppg": 26.0,
+      "total_points": 2026.0
+    },
+    {
+      "player_name": "Jalen Brunson",
+      "team": "NYK",
+      "games": 74,
+      "ppg": 26.0,
+      "total_points": 1927.0
+    },
+    {
+      "player_name": "Jamal Murray",
+      "team": "DEN",
+      "games": 75,
+      "ppg": 25.4,
+      "total_points": 1905.0
+    }
+  ],
+  "rest_results": [
+    {
+      "rest_advantage": "2+ fewer days",
+      "win_pct": 42.5531914894,
+      "team_games": 94
+    },
+    {
+      "rest_advantage": "1 fewer day",
+      "win_pct": 49.356223176,
+      "team_games": 466
+    },
+    {
+      "rest_advantage": "Equal rest",
+      "win_pct": 50.0,
+      "team_games": 1308
+    },
+    {
+      "rest_advantage": "1 extra day",
+      "win_pct": 50.643776824,
+      "team_games": 466
+    },
+    {
+      "rest_advantage": "2+ extra days",
+      "win_pct": 57.4468085106,
+      "team_games": 94
+    }
+  ]
+}

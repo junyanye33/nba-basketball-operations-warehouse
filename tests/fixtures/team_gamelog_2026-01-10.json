@@ -1,0 +1,14 @@
+{
+  "resource": "leaguegamelog",
+  "parameters": {"Season": "2025-26", "PlayerOrTeam": "T", "DateFrom": "01/10/2026", "DateTo": "01/10/2026"},
+  "resultSets": [
+    {
+      "name": "LeagueGameLog",
+      "headers": ["SEASON_ID", "TEAM_ID", "TEAM_ABBREVIATION", "TEAM_NAME", "GAME_ID", "GAME_DATE", "MATCHUP", "WL", "MIN", "FGM", "FGA", "FG_PCT", "FG3M", "FG3A", "FG3_PCT", "FTM", "FTA", "FT_PCT", "OREB", "DREB", "REB", "AST", "STL", "BLK", "TOV", "PF", "PTS", "PLUS_MINUS"],
+      "rowSet": [
+        ["22025", 1610612738, "BOS", "Boston Celtics", "0022500641", "2026-01-10", "BOS vs. DET", "W", 240, 41, 88, 0.466, 15, 40, 0.375, 15, 18, 0.833, 10, 35, 45, 26, 7, 5, 12, 18, 112, 8.0],
+        ["22025", 1610612765, "DET", "Detroit Pistons", "0022500641", "2026-01-10", "DET @ BOS", "L", 240, 39, 90, 0.433, 10, 32, 0.313, 16, 22, 0.727, 12, 33, 45, 24, 6, 4, 14, 20, 104, -8.0]
+      ]
+    }
+  ]
+}

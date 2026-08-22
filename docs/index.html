@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A complete 2025 to 2026 NBA regular season data warehouse with reliable ingestion, reconciliation, and basketball operations reporting.">
+  <title>NBA Basketball Operations Warehouse | Junyan Ye</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="shell">
+      <a class="brand" href="#">Junyan Ye</a>
+      <div class="navlinks">
+        <a href="#findings">Findings</a>
+        <a href="#engineering">Engineering</a>
+        <a href="#method">Method</a>
+        <a href="https://github.com/junyanye33/nba-basketball-operations-warehouse">View repository</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <p class="eyebrow">Data engineering case study</p>
+        <h1>NBA Basketball Operations Warehouse</h1>
+        <p class="lede">
+          A production style warehouse for the complete 2025 to 2026 NBA regular
+          season. The system converts official NBA game logs into trusted player
+          form, team performance, and schedule context datasets.
+        </p>
+      </div>
+      <aside class="hero-aside">
+        <strong>The business question</strong>
+        <p>
+          Which players and teams sustained strong form, and how did rest
+          advantage relate to winning?
+        </p>
+        <a class="button" href="#findings">Explore the results</a>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell metrics" aria-label="Project metrics">
+      <div class="metric">
+        <span class="metric-value">1,230</span>
+        <span class="metric-label">regular season games</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">26,651</span>
+        <span class="metric-label">player game records</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">582</span>
+        <span class="metric-label">distinct players</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">164 of 164</span>
+        <span class="metric-label">game dates reconciled</span>
+      </div>
+      <div class="metric">
+        <span class="metric-value">18</span>
+        <span class="metric-label">automated tests</span>
+      </div>
+    </div>
+
+    <section class="section" id="findings">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Primary finding</p>
+          <h2>Rest matters most when the gap is large</h2>
+          <p>
+            Each team was compared with its opponent in the same game. This
+            controls for the schedule context better than grouping teams by
+            their own rest alone.
+          </p>
+        </div>
+
+        <div class="finding">
+          <div class="finding-number">14.9</div>
+          <div class="finding-copy">
+            <h3>percentage point swing between the two extremes</h3>
+            <p>
+              Teams with at least two extra rest days won 57.4 percent of their
+              games. Teams with at least two fewer rest days won 42.6 percent.
+              Equal rest produced the expected 50 percent split.
+            </p>
+          </div>
+        </div>
+
+        <figure class="figure">
+          <img src="assets/rest_advantage.png" alt="Win rate by rest advantage compared with the opponent">
+          <figcaption>
+            Source: NBA Stats API. Complete 2025 to 2026 regular season.
+            Sample sizes count team game observations.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section surface">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Season results</p>
+          <h2>From individual form to team outcomes</h2>
+          <p>
+            The Gold layer supports player level and team level questions
+            without rebuilding transformations for every analysis.
+          </p>
+        </div>
+
+        <div class="visual-grid">
+          <figure class="figure wide">
+            <img src="assets/season_scoring_leaders.png" alt="NBA season scoring leaders with at least 55 appearances">
+            <figcaption>
+              Luka Dončić led qualified scorers at 33.5 points per game.
+              The 55 appearance threshold reduces small sample distortion.
+            </figcaption>
+          </figure>
+
+          <figure class="figure wide">
+            <img src="assets/player_form_trends.png" alt="Prior ten game scoring trends for five leading scorers">
+            <figcaption>
+              Every value is leakage safe. The current game is excluded from
+              the prior ten game average.
+            </figcaption>
+          </figure>
+
+          <figure class="figure wide">
+            <img src="assets/team_performance.png" alt="Team wins compared with average point differential">
+            <figcaption>
+              Oklahoma City combined the highest win total with the strongest
+              average scoring margin. Point differential provides context that
+              a standings table alone cannot show.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="insight-list">
+          <article class="insight">
+            <span class="label">Scoring</span>
+            <h3>Elite production at meaningful volume</h3>
+            <p>
+              Qualified leaders are filtered by appearances, so availability
+              is part of the result rather than an afterthought.
+            </p>
+          </article>
+          <article class="insight">
+            <span class="label">Form</span>
+            <h3>Trends use only information available before tipoff</h3>
+            <p>
+              Window frames stop at the prior game, which makes the mart safe
+              for reporting and future model features.
+            </p>
+          </article>
+          <article class="insight">
+            <span class="label">Teams</span>
+            <h3>Win totals are paired with scoring margin</h3>
+            <p>
+              This separates close game variance from teams that consistently
+              outscored opponents across the season.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="engineering">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Reliable delivery</p>
+          <h2>The report is backed by an auditable pipeline</h2>
+          <p>
+            The project is designed so another engineer can explain where each
+            number came from, replay any date, and detect incomplete data.
+          </p>
+        </div>
+
+        <figure class="figure">
+          <img src="assets/pipeline_reliability.png" alt="Monthly player game rows loaded with full reconciliation">
+          <figcaption>
+            All 164 game dates passed player row accounting, team row
+            accounting, and game grain checks. No source rows were silently
+            dropped.
+          </figcaption>
+        </figure>
+
+        <div class="architecture">
+          <div class="architecture-copy">
+            <p class="eyebrow">Architecture</p>
+            <h2>Each layer has one clear responsibility</h2>
+            <p>
+              Two season level API requests are split into daily Bronze
+              snapshots. This keeps API usage low while preserving daily
+              lineage, replay, and reconciliation.
+            </p>
+            <div class="stack" aria-label="Technology stack">
+              <span class="tag">Python</span>
+              <span class="tag">SQL</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">DuckDB</span>
+              <span class="tag">SQLAlchemy</span>
+              <span class="tag">Alembic</span>
+              <span class="tag">pytest</span>
+              <span class="tag">GitHub Actions</span>
+              <span class="tag">Docker</span>
+            </div>
+          </div>
+
+          <div class="flow">
+            <div class="flow-step">
+              <strong>SOURCE</strong>
+              <div>
+                <h3>NBA Stats API</h3>
+                <p>
+                  Chrome TLS impersonation, retry logic, and polite request
+                  pacing for reliable official data access.
+                </p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <strong>BRONZE</strong>
+              <div>
+                <h3>Immutable daily JSON snapshots</h3>
+                <p>
+                  Append only manifest entries record checksums, byte sizes,
+                  row counts, source dates, and ingestion timestamps.
+                </p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <strong>SILVER</strong>
+              <div>
+                <h3>Typed relational tables</h3>
+                <p>
+                  Natural key upserts make replays idempotent. Invalid records
+                  enter quarantine with a reason instead of disappearing.
+                </p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <strong>GOLD</strong>
+              <div>
+                <h3>Columnar facts and analytical marts</h3>
+                <p>
+                  Player form, team schedule context, and completeness marts
+                  support fast reporting in DuckDB.
+                </p>
+              </div>
+            </div>
+            <div class="flow-step">
+              <strong>QUALITY</strong>
+              <div>
+                <h3>Daily reconciliation</h3>
+                <p>
+                  Bronze counts must equal loaded plus quarantined rows, and
+                  every game must contain exactly two team records.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section surface">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Production incidents</p>
+          <h2>Real failures improved the design</h2>
+          <p>
+            The most useful engineering evidence is not that nothing failed.
+            It is that failures were observable, explainable, and recoverable.
+          </p>
+        </div>
+
+        <article class="incident">
+          <h3>The Berlin neutral site game broke home and away logic</h3>
+          <p>
+            The January 15 reconciliation reported 18 team rows but only eight
+            derived games. The official feed marked both Orlando and Memphis
+            as away teams. The fix added deterministic slot assignment and an
+            <code>is_neutral</code> field through Alembic migration 0002. The
+            affected date was replayed from Bronze without another API call.
+          </p>
+        </article>
+
+        <article class="incident">
+          <h3>Plain Python requests stalled at the source</h3>
+          <p>
+            Direct curl requests succeeded while the standard Python client
+            timed out. The difference identified TLS fingerprinting as the
+            cause. The client now uses Chrome impersonation through
+            <code>curl_cffi</code>, with bounded retries and request pacing.
+          </p>
+        </article>
+
+        <article class="incident">
+          <h3>Season backfill originally required too many requests</h3>
+          <p>
+            Daily ingestion is appropriate for operations, but historical
+            backfill should not issue hundreds of calls. The season command
+            requests player and team logs once each, partitions both responses
+            by game date, and retains the same daily lineage contract.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="method">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Method and limits</p>
+          <h2>What the results do and do not claim</h2>
+        </div>
+
+        <div class="method">
+          <div>
+            <h3>Coverage</h3>
+            <p>
+              All 1,230 regular season games from October 21, 2025 through
+              April 12, 2026. Playoffs are outside this project scope.
+            </p>
+          </div>
+          <div>
+            <h3>Interpretation</h3>
+            <p>
+              Rest advantage is descriptive, not causal. Travel distance,
+              injuries, team strength, and intentional rest may also influence
+              game outcomes.
+            </p>
+          </div>
+          <div>
+            <h3>Verification</h3>
+            <p>
+              Pipeline checks validate completeness and grain. Selected scores
+              and player lines were also compared with NBA.com, official scorer
+              reports, ESPN, and Basketball Reference.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <p>
+        NBA Basketball Operations Warehouse. Built by Junyan Ye using official
+        2025 to 2026 regular season data.
+      </p>
+      <a href="https://github.com/junyanye33/nba-basketball-operations-warehouse">Review the source code</a>
+    </div>
+  </footer>
+</body>
+</html>
