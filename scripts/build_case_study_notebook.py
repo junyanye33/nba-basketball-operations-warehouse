@@ -647,9 +647,9 @@ custom_style = """
 
 navigation = """
 <div class="portfolio-nav">
-  <a href="index.html">Junyan Ye</a>
+  <a href="https://junyanye33.github.io/">Junyan Ye</a>
   <div class="links">
-    <a href="index.html">Projects</a>
+    <a href="https://junyanye33.github.io/#projects">Projects</a>
     <a href="https://github.com/junyanye33/nba-basketball-operations-warehouse">Source code</a>
   </div>
 </div>
